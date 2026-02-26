@@ -1,0 +1,150 @@
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background: var(--color-bg);
+}
+
+.timeline-toolbar {
+    height: 32px;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.track-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.trim-info {
+    display: flex;
+    gap: 1rem;
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.timeline-tracks-area {
+    flex: 1;
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    user-select: none;
+    cursor: text;
+    /* Indicating it's scrubbable */
+}
+
+.playhead {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.playhead-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--color-accent);
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(255, 51, 102, 0.4);
+}
+
+.playhead-handle {
+    position: absolute;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tracks {
+    padding: 2rem 0;
+    min-width: 100%;
+}
+
+.track-row {
+    height: var(--timeline-track-height);
+    position: relative;
+    background: rgba(255, 255, 255, 0.02);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.trimmed-mask {
+    position: absolute;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.track-segment {
+    position: absolute;
+    height: calc(100% - 16px);
+    background: rgba(212, 255, 0, 0.05);
+    border-top: 2px solid var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+    display: flex;
+    z-index: 3;
+}
+
+.segment-handle {
+    position: absolute;
+    width: 16px;
+    height: 100%;
+    background: var(--color-primary);
+    cursor: ew-resize;
+    border-radius: 4px;
+    opacity: 0.9;
+    transition: opacity 0.2s, transform 0.1s;
+    top: 0;
+    z-index: 4;
+}
+
+.segment-handle.left {
+    left: 0;
+    transform: translateX(-50%);
+}
+
+.segment-handle.right {
+    right: 0;
+    transform: translateX(50%);
+}
+
+.segment-handle:hover {
+    opacity: 1;
+    width: 20px;
+}
+
+.segment-content {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.waveform-placeholder {
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(90deg,
+            transparent,
+            transparent 8px,
+            var(--color-primary) 8px,
+            var(--color-primary) 10px);
+    opacity: 0.2;
+}
